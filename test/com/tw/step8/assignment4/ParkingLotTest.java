@@ -30,4 +30,21 @@ class ParkingLotTest {
     parking.add(Vehicle.CAR);
     assertTrue(parking.isLotFull());
   }
+
+  @Test
+  void shouldReturnFalseWhenParkingLotIsNoT80PercentFull() {
+    ParkingLot parking = new ParkingLot(2);
+    parking.add(Vehicle.CAR);
+    assertFalse(parking.isEightyPercentFull());
+  }
+
+  @Test
+  void shouldReturnTrueWhenParkingLotIs80PercentFull() {
+    ParkingLot parkingLot = new ParkingLot(5);
+    parkingLot.add(Vehicle.CAR);
+    parkingLot.add(Vehicle.CAR);
+    parkingLot.add(Vehicle.CAR);
+    parkingLot.add(Vehicle.CAR);
+    assertTrue(parkingLot.isEightyPercentFull());
+  }
 }

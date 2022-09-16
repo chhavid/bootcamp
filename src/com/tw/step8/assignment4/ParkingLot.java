@@ -21,4 +21,8 @@ public class ParkingLot {
   public boolean isLotFull() {
     return filledSlots >= capacity;
   }
+
+  public boolean isEightyPercentFull() {
+    return filledSlots >= 0.8 * capacity;
+  }
 }
