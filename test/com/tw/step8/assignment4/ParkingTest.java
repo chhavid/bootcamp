@@ -16,4 +16,11 @@ class ParkingTest {
     Parking parking = new Parking(10);
     assertTrue(parking.isLotAvailable());
   }
+
+  @Test
+  void shouldReturnFalseWhenParkingSlotIsNotAvailable() {
+    Parking parking = new Parking(1);
+    parking.park(Vehicle.CAR);
+    assertFalse(parking.isLotAvailable());
+  }
 }
