@@ -1,28 +1,20 @@
 package com.tw.step8.assignment4;
 
-import com.tw.step8.assignment4.exception.SpaceNotAvailableException;
-
 import java.util.ArrayList;
 
 public class Parking {
+  private final ArrayList<ParkingLot> parkingLots;
 
-  private final ArrayList<Vehicle> parkingSlot ;
-  private int capacity;
-
-  public Parking(int capacity) {
-    this.capacity = capacity;
-    this.parkingSlot =  new ArrayList<Vehicle>();
+  public Parking(ArrayList<ParkingLot> parkingLots) {
+    this.parkingLots = parkingLots;
   }
 
-  int park(Vehicle vehicle) throws SpaceNotAvailableException {
-    if(isLotFull()){
-      throw new SpaceNotAvailableException(this.capacity);
+  public Status park(Vehicle vehicle) {
+    for (ParkingLot parkingLot : this.parkingLots) {
+      if (!parkingLot.isLotFull()){
+        return parkingLot.add(vehicle);
+      }
     }
-    parkingSlot.add(vehicle);
-    return parkingSlot.indexOf(vehicle);
-  }
-
-  public boolean isLotFull() {
-    return parkingSlot.size() >= capacity;
+    return Status.PARKING_NOT_AVAILABLE;
   }
 }
