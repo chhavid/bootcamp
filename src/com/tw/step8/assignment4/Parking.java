@@ -9,12 +9,22 @@ public class Parking {
     this.parkingLots = parkingLots;
   }
 
-  public Status park(Vehicle vehicle) {
+  public Status park() {
     for (ParkingLot parkingLot : this.parkingLots) {
       if (!parkingLot.isLotFull()){
-        return parkingLot.add(vehicle);
+        return parkingLot.add();
       }
     }
     return Status.PARKING_NOT_AVAILABLE;
+  }
+
+
+  public boolean areEightyPercentFull() {
+    for (ParkingLot parkingLot : parkingLots) {
+      if(!parkingLot.isEightyPercentFull()){
+        return false;
+      }
+    }
+    return true;
   }
 }
