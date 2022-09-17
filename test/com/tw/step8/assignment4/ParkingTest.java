@@ -11,7 +11,7 @@ class ParkingTest {
 
   @Test
   void shouldParkACar() {
-    ParkingLot parkingLot = new ParkingLot("P1",10);
+    ParkingLot parkingLot = new ParkingLot("P1",10,new Notifier());
     ArrayList<ParkingLot> parkingLots = new ArrayList<>();
     parkingLots.add(parkingLot);
     Parking parking = new Parking(parkingLots);
@@ -20,8 +20,8 @@ class ParkingTest {
 
   @Test
   void shouldReturnTrueIfEachParkingLotsAreEightyPercentFull() {
-    ParkingLot parkingLot1 = new ParkingLot("P1",1);
-    ParkingLot parkingLot2 = new ParkingLot("P1",1);
+    ParkingLot parkingLot1 = new ParkingLot("P1",1,new Notifier());
+    ParkingLot parkingLot2 = new ParkingLot("P1",1,new Notifier());
 
     parkingLot1.add();
     parkingLot2.add();
@@ -34,8 +34,8 @@ class ParkingTest {
 
   @Test
   void shouldReturnFalseIfEachParkingLotsAreNotEightyPercentFull() {
-    ParkingLot parkingLot1 = new ParkingLot("P1",6);
-    ParkingLot parkingLot2 = new ParkingLot("P1",1);
+    ParkingLot parkingLot1 = new ParkingLot("P1",6,new Notifier());
+    ParkingLot parkingLot2 = new ParkingLot("P1",1,new Notifier());
 
     parkingLot1.add();
     parkingLot2.add();

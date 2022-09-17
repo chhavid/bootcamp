@@ -9,40 +9,47 @@ import static org.junit.jupiter.api.Assertions.*;
 class ParkingLotTest {
 
   @Test
-  void shouldParkACar(){
-    ParkingLot parking = new ParkingLot("P1", 10);
+  void shouldParkACar() {
+
+    Notifier notifier = new Notifier();
+    ParkingLot parking = new ParkingLot("P1", 10, notifier);
     assertEquals(Status.PARKED, parking.add());
   }
 
   @Test
   void shouldTellParkingIsNotAvailableWhileParking() {
-    ParkingLot parking = new ParkingLot("P1", 0);
-    assertEquals(Status.PARKING_NOT_AVAILABLE,parking.add());
+    Notifier notifier = new Notifier();
+    ParkingLot parking = new ParkingLot("P1", 0, notifier);
+    assertEquals(Status.PARKING_NOT_AVAILABLE, parking.add());
   }
 
   @Test
   void shouldReturnFalseWhenParkingSlotIsNotFull() {
-    ParkingLot parking = new ParkingLot("P1", 10);
+    Notifier notifier = new Notifier();
+    ParkingLot parking = new ParkingLot("P1", 10, notifier);
     assertFalse(parking.isLotFull());
   }
 
   @Test
   void shouldReturnTrueWhenParkingSlotIsFull() {
-    ParkingLot parking = new ParkingLot("P1", 1);
+    Notifier notifier = new Notifier();
+    ParkingLot parking = new ParkingLot("P1", 1, notifier);
     parking.add();
     assertTrue(parking.isLotFull());
   }
 
   @Test
   void shouldReturnFalseWhenParkingLotIsNoT80PercentFull() {
-    ParkingLot parking = new ParkingLot("P1", 2);
+    Notifier notifier = new Notifier();
+    ParkingLot parking = new ParkingLot("P1", 2, notifier);
     parking.add();
     assertFalse(parking.isEightyPercentFull());
   }
 
   @Test
   void shouldReturnTrueWhenParkingLotIs80PercentFull() {
-    ParkingLot parkingLot = new ParkingLot("P1", 5);
+    Notifier notifier = new Notifier();
+    ParkingLot parkingLot = new ParkingLot("P1", 5, notifier);
     parkingLot.add();
     parkingLot.add();
     parkingLot.add();
@@ -50,27 +57,19 @@ class ParkingLotTest {
     assertTrue(parkingLot.isEightyPercentFull());
   }
 
-@Test
+  @Test
   void shouldReturnTrueWhenParkingLotLessThanTwentyPercent() {
-    ParkingLot parkingLot = new ParkingLot("P1", 6);
+    Notifier notifier = new Notifier();
+    ParkingLot parkingLot = new ParkingLot("P1", 6, notifier);
     parkingLot.add();
     assertTrue(parkingLot.isLessThanTwentyPercentFull());
   }
 
-@Test
+  @Test
   void shouldReturnFalseWhenParkingLotMoreThanTwentyPercent() {
-    ParkingLot parkingLot = new ParkingLot("P1", 4);
+    Notifier notifier = new Notifier();
+    ParkingLot parkingLot = new ParkingLot("P1", 4, notifier);
     parkingLot.add();
     assertFalse(parkingLot.isLessThanTwentyPercentFull());
-  }
-
-
-  @Test
-  void shouldGiveStatusOfParkingSlot() {
-    ParkingLot parkingLot = new ParkingLot("P1", 7);
-    parkingLot.add();
-    ArrayList<Status> actualStatusList = new ArrayList<Status>();
-
-    assertTrue(parkingLot.isEightyPercentFull());
   }
 }

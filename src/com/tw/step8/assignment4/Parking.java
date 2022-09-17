@@ -18,7 +18,6 @@ public class Parking {
     return Status.PARKING_NOT_AVAILABLE;
   }
 
-
   public boolean areEightyPercentFull() {
     for (ParkingLot parkingLot : parkingLots) {
       if(!parkingLot.isEightyPercentFull()){

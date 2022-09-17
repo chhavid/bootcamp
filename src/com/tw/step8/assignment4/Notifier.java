@@ -3,11 +3,19 @@ package com.tw.step8.assignment4;
 import java.util.ArrayList;
 
 public class Notifier {
-  private ArrayList<Status> statusList;
+  private final ArrayList<Notifiable> observers;
 
-  public Notifier(ArrayList<Status> statusList) {
-    this.statusList = statusList;
-  }
+    public Notifier() {
+      this.observers = new ArrayList<Notifiable>();
+    }
 
+    public void add(Notifiable observer) {
+      observers.add(observer);
+    }
 
+    public void notifyObservers(String parkingLotId, Status status) {
+      for (Notifiable observer : observers) {
+        observer.notify(parkingLotId, status);
+      }
+    }
 }

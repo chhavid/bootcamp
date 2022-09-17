@@ -1,32 +1,30 @@
 package com.tw.step8.assignment4;
 
-import java.util.ArrayList;
-
 public class ParkingLot {
 
   private int filledSlots;
   private String id;
   private int capacity;
+  private Notifier notifier;
 
-  public ParkingLot(String id, int capacity) {
+  public ParkingLot(String id, int capacity, Notifier notifier) {
     this.id = id;
     this.capacity = capacity;
+    this.notifier = notifier;
     this.filledSlots = 0;
   }
 
-//  public ArrayList<Status> getStatus(){
-//    ArrayList<Status> statusList = new ArrayList<>();
-//    if(isLotFull()){
-//      statusList.add(Status.LOT_FULL);
-//    }
-//    if(isEightyPercentFull()){
-//      statusList.add(Status.EIGHTY_PERCENT_FILLED);
-//    }
-//    if(isLessThanTwentyPercentFull()){
-//      statusList.add(Status.TWENTY_PERCENT_FILLED);
-//    }
-//    return statusList;
-//  }
+  private void notifyStaff(){
+    if(isLotFull()){
+      notifier.notifyObservers(id,Status.LOT_FULL);
+    }
+    if(isEightyPercentFull()){
+      notifier.notifyObservers(id, Status.EIGHTY_PERCENT_FILLED);
+    }
+    if(isLessThanTwentyPercentFull()){
+      notifier.notifyObservers(id, Status.TWENTY_PERCENT_FILLED);
+    }
+  }
 
   Status add(){
     if(isLotFull()){
@@ -34,6 +32,7 @@ public class ParkingLot {
     }
 
     this.filledSlots++;
+    notifyStaff();
     return Status.PARKED;
   }
 
